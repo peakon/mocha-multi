@@ -293,6 +293,14 @@ function mochaMulti(runner, options) {
 
 class MochaMulti {
   constructor(runner, options) {
+    if (options.mochaMultiOptions) {
+      let reporterOptions = options.mochaMultiOptions;
+      if (typeof reporterOptions === 'string') {
+        reporterOptions = JSON.parse(reporterOptions);
+      }
+      // eslint-disable-next-line no-param-reassign
+      options = Object.assign({}, options, { reporterOptions });
+    }
     Object.assign(this, mochaMulti(runner, options));
   }
 }
